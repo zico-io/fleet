@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 /* Base design system — tokens, base layer, surface + motion (see @zico/ui). */
 @import "@zico/ui/styles.css";
 
