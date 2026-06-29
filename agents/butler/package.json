@@ -1,0 +1,37 @@
+{
+  "name": "@zico/butler",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#*": "./agent/*",
+    "#evals/*": "./evals/*"
+  },
+  "scripts": {
+    "dev": "eve dev --no-ui --port 3001",
+    "repl": "eve dev --port 3001",
+    "build": "eve build",
+    "start": "eve start --port 3001",
+    "check-types": "tsc",
+    "deploy": "eve deploy",
+    "discord:register": "bun run scripts/register-discord-commands.ts"
+  },
+  "dependencies": {
+    "@braintrust/otel": "^0.2.1",
+    "@vercel/connect": "0.2.2",
+    "@vercel/otel": "^2.1.3",
+    "ai": "^7.0.0",
+    "eve": "^0.16.2",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.x",
+    "typescript": "7.0.1-rc"
+  },
+  "overrides": {
+    "ai": "^7.0.0"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

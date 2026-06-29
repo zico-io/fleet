@@ -1,0 +1,36 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# build outputs
+dist
+.next
+.output
+.nitro
+.astro
+.eve
+.workflow-data
+.vercel
+.turbo
+*.tsbuildinfo
+
+# env
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*
+coverage
+
+# tooling state (oh-my-claudecode, etc.)
+.omc/
+.pi/
+.impeccable/
+
+# local / machine-specific config
+.envrc
+.claude/settings.local.json
