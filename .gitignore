@@ -34,3 +34,10 @@ coverage
 # local / machine-specific config
 .envrc
 .claude/settings.local.json
+
+# opentofu / terraform (state + secrets)
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.*
+infra/terraform.tfvars
+infra/.terraform.lock.hcl

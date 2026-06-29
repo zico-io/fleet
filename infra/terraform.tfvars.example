@@ -1,0 +1,35 @@
+# Copy to terraform.tfvars (gitignored) and fill in. Mirrors .env.example.
+# Provider tokens are NOT here — export them instead:
+#   export VERCEL_API_TOKEN=...
+#   export SUPABASE_ACCESS_TOKEN=...
+
+vercel_team = null            # team slug, or null for personal account
+github_repo = "you/zico"
+
+# Cloudflare (api Worker)
+cloudflare_account_id = ""
+# cloudflare_zone = "garf.dev"       # defaults below; override if needed
+# api_hostname    = "api.garf.dev"
+
+# Supabase (existing project)
+supabase_org_id      = "your-org-slug"
+supabase_project_ref = "abcdefghijklmnop"
+supabase_region      = "us-east-1"
+supabase_db_password = ""
+supabase_url         = "https://abcdefghijklmnop.supabase.co"
+supabase_anon_key    = ""
+supabase_service_role_key = ""
+
+# Agent / app secrets
+ai_gateway_api_key = ""
+braintrust_api_key = ""
+
+# Discord (optional — leave "" to skip)
+discord_public_key        = ""
+discord_bot_token         = ""
+discord_application_id    = ""
+discord_deploy_channel_id = ""
+
+# Optional URL overrides (default to <project>.vercel.app)
+# api_url   = "https://api.example.com"
+# agent_url = "https://agent.example.com"

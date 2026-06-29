@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "start": "bun run src/index.ts",
+    "dev:worker": "wrangler dev",
+    "build:worker": "wrangler deploy --dry-run --outdir dist",
     "build": "tsc --noEmit",
     "check-types": "tsc --noEmit",
     "test": "bun test",
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@types/bun": "^1.1.0",
     "@zico/tsconfig": "workspace:*",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "wrangler": "^4.0.0"
   }
 }

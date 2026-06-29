@@ -197,7 +197,7 @@ app.doc("/openapi.json", {
   },
   servers: [
     { url: "http://127.0.0.1:8787", description: "Local gateway (apps/api)" },
-    { url: "https://your-gateway.example.com", description: "Production gateway" },
+    { url: "https://api.garf.dev", description: "Production gateway" },
   ],
   tags: [
     { name: "Sessions", description: "Durable agent conversations" },

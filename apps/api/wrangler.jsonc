@@ -1,0 +1,14 @@
+{
+  // Used by `wrangler` to bundle the Worker (e.g. `build:worker` produces
+  // dist/index.js, which OpenTofu uploads). Runtime config (compat date/flags,
+  // vars, secrets) is set on the cloudflare_workers_script resource in infra/.
+  "name": "zico-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-06-28",
+  // nodejs_compat: gives node built-ins (async_hooks for OTel) AND populates
+  // process.env from vars/secrets, so the app's process.env.* reads keep working.
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "AGENT_URL": "http://127.0.0.1:3001"
+  }
+}
