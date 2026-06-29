@@ -1,0 +1,176 @@
+/* ── zico base design system ─────────────────────────────────────────────────
+   The design tokens + base primitives shared across apps (see DESIGN.md).
+   This file carries no `@import "tailwindcss"` of its own: a consuming app
+   imports it AFTER importing Tailwind, and adds this package to its Tailwind
+   `@source` globs so the component utility classes get generated.
+
+   ── The Olive Study — design tokens ─────────────────────────────────────────
+   Mapped onto shadcn's semantic token names so the Base UI components inherit
+   the palette. Warmth lives in the brand colors + type, never the page bg.
+   Light: pure-white page. Dark: warm charcoal, same olive hue family. */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.22 0.015 110);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.015 110);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.015 110);
+  --primary: oklch(0.47 0.1 115);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.975 0.004 110);
+  --secondary-foreground: oklch(0.22 0.015 110);
+  --muted: oklch(0.975 0.004 110);
+  --muted-foreground: oklch(0.48 0.012 110);
+  --accent: oklch(0.975 0.004 110);
+  --accent-foreground: oklch(0.22 0.015 110);
+  --destructive: oklch(0.55 0.16 28);
+  --border: oklch(0.92 0.004 110);
+  --input: oklch(0.92 0.004 110);
+  --ring: oklch(0.47 0.1 115);
+  /* Brand terracotta accent (DESIGN.md "Burnt Terracotta"). shadcn's --accent
+     is a neutral hover bg, so the brand accent gets its own token. */
+  --brand: oklch(0.52 0.15 48);
+  --brand-foreground: oklch(1 0 0);
+  /* Canvas: the tinted layer the shell surfaces float on (Shopify-style). One
+     tonal step below the white card so white surfaces lift off it. Same olive
+     hue family — warmth in the brand, not a cream/sand bg. */
+  --canvas: oklch(0.965 0.005 110);
+  --radius: 0.75rem;
+}
+
+/* Forced via `.dark` on <html>; the pre-paint script resolves system→class. */
+:root.dark {
+    --background: oklch(0.17 0.008 110);
+    --foreground: oklch(0.95 0.006 110);
+    --card: oklch(0.215 0.01 110);
+    --card-foreground: oklch(0.95 0.006 110);
+    --popover: oklch(0.215 0.01 110);
+    --popover-foreground: oklch(0.95 0.006 110);
+    --primary: oklch(0.48 0.105 115);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.255 0.011 110);
+    --secondary-foreground: oklch(0.95 0.006 110);
+    --muted: oklch(0.235 0.01 110);
+    --muted-foreground: oklch(0.68 0.01 110);
+    --accent: oklch(0.255 0.011 110);
+    --accent-foreground: oklch(0.95 0.006 110);
+    --destructive: oklch(0.62 0.16 28);
+    --border: oklch(1 0 0 / 0.1);
+    --input: oklch(1 0 0 / 0.14);
+    --ring: oklch(0.48 0.105 115);
+    --brand: oklch(0.64 0.14 50);
+    --brand-foreground: oklch(0.17 0.01 50);
+    /* Darkest layer; the 0.215 card surfaces lift above it. */
+    --canvas: oklch(0.15 0.008 110);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-canvas: var(--canvas);
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-heading: var(--font-inter), system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ── Layout surface ──────────────────────────────────────────────────────────
+   Each shell region (sidebar, content, mobile nav) is a rounded card floating
+   on the canvas. Border stays the primary separator (Flat-By-Default Rule); the
+   soft olive-tinted shadow is the floating-surface case Elevation allows — it
+   reads as a lift off the canvas, not ambient decoration on a static card. */
+.surface {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    0 1px 2px oklch(0.22 0.015 110 / 0.04),
+    0 2px 6px oklch(0.22 0.015 110 / 0.05);
+}
+
+/* ── Motion ────────────────────────────────────────────────────────────────
+   Motion-driven entrances live in components (motion/react). These keyframes
+   cover the streaming caret and "thinking" dots. Reduced-motion fallbacks
+   below. */
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
+}
+
+@keyframes dot-pulse {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+.caret {
+  display: inline-block;
+  width: 0.46ch;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background-color: var(--primary);
+  animation: caret-blink 1.1s steps(1) infinite;
+}
+
+.dot {
+  animation: dot-pulse 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret {
+    animation: none;
+    opacity: 1;
+  }
+  .dot {
+    animation: none;
+    opacity: 0.6;
+  }
+}

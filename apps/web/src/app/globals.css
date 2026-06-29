@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+/* Base design system — tokens, base layer, surface + motion (see @zico/ui). */
+@import "@zico/ui/styles.css";
+
+/* Theme is class-based: a pre-paint script (layout.tsx) sets `.dark`/`.light`
+   on <html> from the user's preference (default `system` → OS scheme). `dark:`
+   utilities resolve from that class. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Scan the shared UI package source so its Tailwind classes are generated.
+   Pointing at the workspace source is deterministic regardless of where Bun
+   hoists the symlink, and avoids Tailwind v4's default node_modules ignore. */
+@source "../../../../packages/ui/src";
+
+/* ── Docs prose ──────────────────────────────────────────────────────────────
+   Styles the build-time Markdown rendered in app/docs (marked → HTML). No
+   typography plugin; just the elements our docs actually use. */
+.docs-prose {
+  @apply text-[15px] leading-relaxed text-foreground;
+}
+.docs-prose h1 {
+  @apply mb-4 font-serif text-3xl font-semibold tracking-tight;
+}
+.docs-prose h2 {
+  @apply mt-10 mb-3 text-xl font-semibold tracking-tight;
+}
+.docs-prose h3 {
+  @apply mt-6 mb-2 text-base font-semibold;
+}
+.docs-prose p,
+.docs-prose ul,
+.docs-prose ol,
+.docs-prose table {
+  @apply my-4;
+}
+.docs-prose ul {
+  @apply list-disc pl-6;
+}
+.docs-prose ol {
+  @apply list-decimal pl-6;
+}
+.docs-prose li {
+  @apply my-1;
+}
+.docs-prose a {
+  @apply text-primary underline underline-offset-2 hover:no-underline;
+}
+.docs-prose code {
+  @apply rounded bg-muted px-1.5 py-0.5 font-mono text-[0.85em];
+}
+.docs-prose pre {
+  @apply my-4 overflow-x-auto rounded-xl border border-border p-4 text-[0.85em];
+}
+.docs-prose pre code {
+  @apply bg-transparent p-0;
+}
+
+/* Shiki emits light colors inline + a --shiki-dark var per token; swap to it
+   under the `.dark` theme class. */
+.dark .docs-prose .shiki,
+.dark .docs-prose .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+.docs-prose table {
+  @apply w-full border-collapse text-left text-sm;
+}
+.docs-prose th,
+.docs-prose td {
+  @apply border border-border px-3 py-2;
+}
+.docs-prose th {
+  @apply bg-muted font-medium;
+}
