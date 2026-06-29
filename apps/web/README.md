@@ -21,16 +21,14 @@ Or from this directory:
 bun run dev          # next dev --turbopack --port 3000
 ```
 
-The app proxies chat messages to the Eve agent via the `/api/agent` route handler.
-The agent URL defaults to `http://127.0.0.1:3001` and can be overridden:
-
-```bash
-cp .env.example .env.local
-# edit AGENT_URL if needed
-```
+The app proxies chat messages through the API gateway via the `/api/agent` route
+handler. Config comes from the monorepo-root `.env` (`cp .env.example .env`),
+which `bun run dev` loads and every app inherits — there is no per-app env file.
 
 ## Environment variables
 
-| Variable    | Default                    | Description                       |
-| ----------- | -------------------------- | --------------------------------- |
-| `AGENT_URL` | `http://127.0.0.1:3001`   | Base URL of the Eve agent server. |
+| Variable                        | Default                  | Description                              |
+| ------------------------------- | ------------------------ | ---------------------------------------- |
+| `API_URL`                       | `http://127.0.0.1:8787`  | Base URL of the zico API gateway.        |
+| `NEXT_PUBLIC_SUPABASE_URL`      | —                        | Supabase project URL (auth, chat data).  |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | —                        | Supabase anon key.                       |
